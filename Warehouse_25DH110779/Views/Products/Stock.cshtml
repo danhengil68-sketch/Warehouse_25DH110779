@@ -1,0 +1,41 @@
+﻿@{
+    string action = (string)ViewBag.FormAction;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@using (Html.BeginForm(action, "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label>Sản phẩm</label>
+        @Html.DropDownList(
+                 "productId",
+                 (SelectList)ViewBag.ProductList,
+                 "-- Chọn sản phẩm --",
+                 new { @class = "form-select" })
+    </div>
+
+    <div class="mb-3">
+        <label>Số lượng</label>
+        @Html.TextBox(
+                 "quantity", null,
+                 new
+                 {
+                     type = "number",
+                     step = "1",
+                     @class = "form-control"
+                 })
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Xác nhận
+    </button>
+
+    @Html.ActionLink(
+            "Về danh sách", "Index", null,
+            new { @class = "btn btn-secondary" })
+}

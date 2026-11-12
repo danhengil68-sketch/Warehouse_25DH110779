@@ -1,0 +1,25 @@
+﻿@model Warehouse_25DH110779.Models.Products
+
+@{
+    ViewBag.Title = "Xác nhận xóa";
+}
+
+<h2>Xác nhận xóa</h2>
+
+<p>Sản phẩm: <strong>@Model.ProductName</strong></p>
+<p>Số lượng tồn: <strong>@Model.Quantity</strong></p>
+<p>Bạn có chắc muốn xóa sản phẩm này?</p>
+
+@using (Html.BeginForm("Delete", "Products", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("id", Model.ProductID)
+
+    <button type="submit" class="btn btn-danger">
+        Xác nhận xóa
+    </button>
+
+    @Html.ActionLink(
+        "Hủy", "Index", null,
+        new { @class = "btn btn-secondary" })
+}

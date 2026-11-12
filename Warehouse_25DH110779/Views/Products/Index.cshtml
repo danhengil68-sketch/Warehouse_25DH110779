@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Warehouse_25DH110779.Models.Products>
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<h2>Danh sách sản phẩm</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductID</td>
+                <td>@p.ProductName</td>
+                <td>@p.Category</td>
+                <td>@p.Price.ToString("N2")</td>
+                <td>@p.Quantity</td>
+                <td>
+                    @(p.Quantity == 0 ? "Hết hàng"
+                        : p.Quantity <= 4 ? "Sắp hết hàng"
+                        : "Còn hàng")
+                </td>
+                <td>
+                    @Html.ActionLink(
+                             "Xóa", "Delete",
+                             new { id = p.ProductID },
+                             new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

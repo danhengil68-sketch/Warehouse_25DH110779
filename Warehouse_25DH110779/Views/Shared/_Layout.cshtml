@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Quản lý kho</title>
+    @Styles.Render("~/Content/css")
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background: #17365d;
+            color: white;
+            padding: 18px 24px;
+        }
+
+        .kho {
+            display: flex;
+            min-height: 75vh;
+        }
+
+        aside {
+            width: 240px;
+            flex-shrink: 0;
+            background: #eef2f6;
+            padding: 20px;
+        }
+
+            aside a {
+                display: block;
+                margin-bottom: 16px;
+                text-decoration: none;
+            }
+
+        main {
+            flex: 1;
+            min-width: 0;
+            padding: 24px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h3>QUẢN LÝ KHO HÀNG</h3>
+        <div>Nguyễn Hồng Gia Huy — MSSV: 25DH110779</div>
+    </header>
+
+    <div class="kho">
+        <aside>
+            <h4>Chức năng</h4>
+            @Html.ActionLink("Câu 2 - Danh sách và xóa", "Index", "Products")
+            @Html.ActionLink("Câu 3 - Lọc và sắp xếp", "Filter", "Products")
+            @Html.ActionLink("Câu 4a - Nhập kho", "Receive", "Products")
+            @Html.ActionLink("Câu 4b - Hàng hỏng", "Damage", "Products")
+            @Html.ActionLink("Câu 5 - Điều chuyển", "Transfer", "Products")
+            @Html.ActionLink("Câu 6 - Thêm sản phẩm", "Create", "Products")
+            @Html.ActionLink("Câu 7 - Thống kê", "Statistics", "Products")
+        </aside>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>Ngày sinh: 02/04/2007</footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

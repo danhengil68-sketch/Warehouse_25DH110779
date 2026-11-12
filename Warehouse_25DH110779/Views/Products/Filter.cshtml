@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Warehouse_25DH110779.Models.Products>
+
+@{
+    ViewBag.Title = "Lọc và sắp xếp tồn kho";
+}
+
+<h2>Lọc và sắp xếp tồn kho</h2>
+
+@using (Html.BeginForm("Filter", "Products", FormMethod.Get))
+{
+    <div class="row mb-3">
+        <div class="col-md-5">
+            <label>Danh mục</label>
+            @Html.DropDownList(
+                     "category",
+                     (SelectList)ViewBag.Categories,
+                     "Tất cả danh mục",
+                     new { @class = "form-select" })
+        </div>
+
+        <div class="col-md-2">
+            <label>Từ số lượng</label>
+            @Html.TextBox(
+                     "minQuantity",
+                     Request.QueryString["minQuantity"],
+                     new { type = "number", @class = "form-control" })
+        </div>
+
+        <div class="col-md-2">
+            <label>Đến số lượng</label>
+            @Html.TextBox(
+                     "maxQuantity",
+                     Request.QueryString["maxQuantity"],
+                     new { type = "number", @class = "form-control" })
+        </div>
+
+        <div class="col-md-3">
+            <label>Sắp xếp</label>
+            @Html.DropDownList(
+                     "sort",
+                     (SelectList)ViewBag.SortOptions,
+                     new { @class = "form-select" })
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lọc</button>
+
+    @Html.ActionLink(
+            "Bỏ lọc", "Filter", null,
+            new { @class = "btn btn-secondary" })
+}
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên sản phẩm</th>
+            <th>Danh mục</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductID</td>
+                <td>@p.ProductName</td>
+                <td>@p.Category</td>
+                <td>@p.Price.ToString("N2")</td>
+                <td>@p.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
